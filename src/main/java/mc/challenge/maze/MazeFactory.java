@@ -17,6 +17,7 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 import static mc.Configuration.HUGE;
+import static mc.Configuration.LARGE;
 import static mc.challenge.maze.ArrayUtil.FOUR_DIRECTIONS;
 import static mc.challenge.maze.ArrayUtil.invertrows;
 import static mc.challenge.maze.ArrayUtil.rotate;
@@ -105,6 +106,9 @@ public class MazeFactory {
     }
 
     public static Maze get1WMap(int rows, int cols) {
+        return new Maze(get1WArray(rows, cols));
+    }
+    public static char[][] get1WArray(int rows, int cols) {
         IDungeonGenerator gen = new ConnectingMapGenerator(rows, cols, 1, 1, new RNG(), 1, 0.5);
         char[][] generated = gen.generate();
 
@@ -116,7 +120,7 @@ public class MazeFactory {
         if (Configuration.PRINT_MAZE_CLI) {
             DungeonUtility.debugPrint(generated);
         }
-        return new Maze(generated);
+        return generated;
     }
 
 
@@ -230,9 +234,11 @@ public class MazeFactory {
 
     public static void main(String[] args) throws IOException {
 
-        IntStream.range(5, 15).parallel().forEach(i -> {
+        IntStream.range(1, 15).parallel().forEach(i -> {
             try {
-                Files.write(Path.of("./data/maps/width1huge_" + i + ".map"), toList(hugemap()));
+//                Files.write(Path.of("./data/maps/dungeonhuge_" + i + ".map"), toList(hugemap()));
+//                Files.write(Path.of("./data/maps/dungeonhuge_" + i + ".map"), toList(hugedungeon()));
+                Files.write(Path.of("./data/maps/width1large_" + i + ".map"), toList(get1WArray(LARGE, LARGE)));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -251,6 +257,49 @@ public class MazeFactory {
         return generated;
     }
 
+    static char[][] hugedungeon() {
+        DungeonGenerator dg = new DungeonGenerator(HUGE, HUGE);
+        dg.addStairs();
+
+        char[][] generated = dg.generate();
+        return generated;
+    }
+
+    static char[][] flowingCave(int rc) {
+        IDungeonGenerator gen = new FlowingCaveGenerator(rc, rc);
+        char[][] generated = gen.generate();
+
+
+        setStart(generated);
+        setEnd(generated);
+
+        if (rnd.nextBoolean()) {
+            invertrows(generated);
+        }
+        if (rnd.nextBoolean()) {
+            rotate(generated);
+        }
+        if (rnd.nextBoolean()) {
+            rotate(generated);
+        }
+        if (rnd.nextBoolean()) {
+            invertrows(generated);
+        }
+        if (rnd.nextBoolean()) {
+            invertrows(generated);
+        }
+        if (rnd.nextBoolean()) {
+            rotate(generated);
+        }
+        if (rnd.nextBoolean()) {
+            rotate(generated);
+        }
+        if (rnd.nextBoolean()) {
+            invertrows(generated);
+        }
+        return generated;
+    }
+
 
     static List<String> toList(char[][] arr) {
         List<String> lines = new ArrayList<>();
@@ -266,16 +315,52 @@ public class MazeFactory {
     }
 
 
-    private static List<Maze> hugemazes = null;
-    public static List<Maze> huge1wMazes() {
-        if (hugemazes == null) {
+    private static List<Maze> huge1WidthMazes = null;
+    public static List<Maze> getHuge1wMazes() {
+        if (huge1WidthMazes == null) {
             var list = new ArrayList<Maze>();
             for (int x = 1; x <= 14; x++) {
                 list.add(MazeParser.loadMazeFromFile("width1huge_" + x + ".map"));
             }
-            hugemazes = list;
+            huge1WidthMazes = list;
         }
-        return hugemazes;
+        return huge1WidthMazes;
+    }
+    private static List<Maze> large1WidthMazes = null;
+    public static List<Maze> getLarge1WidthMazes() {
+        if (large1WidthMazes == null) {
+            var list = new ArrayList<Maze>();
+            for (int x = 1; x <= 14; x++) {
+                list.add(MazeParser.loadMazeFromFile("width1large_" + x + ".map"));
+            }
+            large1WidthMazes = list;
+        }
+        return large1WidthMazes;
+    }
+
+    private static List<Maze> hugeDungeons = null;
+    public static List<Maze> getHugeDungeons() {
+        if (hugeDungeons == null) {
+            var list = new ArrayList<Maze>();
+            for (int x = 1; x <= 14; x++) {
+                list.add(MazeParser.loadMazeFromFile("dungeonhuge_" + x + ".map"));
+            }
+            hugeDungeons = list;
+        }
+        return hugeDungeons;
+    }
+
+
+    private static List<Maze> hugeFlowingCaves = null;
+    public static List<Maze> getHugeFlowingCaves() {
+        if (hugeFlowingCaves == null) {
+            var list = new ArrayList<Maze>();
+            for (int x = 1; x <= 14; x++) {
+                list.add(MazeParser.loadMazeFromFile("flowingCavehuge_" + x + ".map"));
+            }
+            hugeFlowingCaves = list;
+        }
+        return hugeFlowingCaves;
     }
 
 
