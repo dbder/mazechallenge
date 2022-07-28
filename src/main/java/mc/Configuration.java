@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import mc.challenge.Challenge;
 import mc.challenge.maze.Maze;
 import mc.challenge.maze.MazeFactory;
+import mc.participants.deboder.DeboChallenge;
 import mc.renamebeforepr.ChallengeImpl;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class Configuration {
     /**
      * Most important part, deliver your own implementation of the Challenge interface
      */
-    public static final Supplier<? extends Challenge> challenge = ChallengeImpl::new;
+    public static final Supplier<? extends Challenge> challenge = DeboChallenge::new;
 
     static final List<Maze> huge1wmazes = MazeFactory.huge1wMazes();
 
