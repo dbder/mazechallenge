@@ -183,7 +183,7 @@ public class DeboChallenge implements Challenge {
 //                        Configuration.SMALL, Configuration.SMALL
 //                        Configuration.MEDIUM, Configuration.MEDIUM
 //                        Configuration.LARGE, Configuration.LARGE
-                        Configuration.HUGE, Configuration.HUGE
+                        Configuration.HUGE
                 )
         ).doAllMoves();
     }
