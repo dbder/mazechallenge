@@ -17,7 +17,7 @@ import java.util.Arrays;
  * Graphically -> {@link mc.GraphicalLauncher} ( for debug purposes )
  * Non graphically ->  {@link mc.HeadlessLauncher}
  * <p>
- * Configure and choose what type of mazes are ran : {@link mc.Configuration}
+ * Configure and choose what type of mazes are ran : {@link Configuration}
  */
 public class ChallengeImpl implements Challenge {
 
