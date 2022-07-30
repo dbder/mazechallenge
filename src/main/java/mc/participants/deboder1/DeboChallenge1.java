@@ -1,4 +1,4 @@
-package mc.participants.deboder;
+package mc.participants.deboder1;
 
 import mc.Configuration;
 import mc.challenge.Challenge;
@@ -8,26 +8,22 @@ import mc.challenge.maze.HeadlessMain;
 import mc.challenge.maze.Maze.CellType;
 import mc.challenge.maze.MazeFactory;
 import mc.challenge.maze.Position;
-import mc.renamebeforepr.ChallengeImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static mc.challenge.maze.Direction.EAST;
 import static mc.challenge.maze.Direction.NORTH;
 import static mc.challenge.maze.Direction.SOUTH;
 import static mc.challenge.maze.Direction.WEST;
-import static mc.challenge.maze.Maze.CellType.FLR;
 import static mc.challenge.maze.Maze.CellType.FSH;
-import static mc.challenge.maze.Maze.CellType.SRT;
 import static mc.challenge.maze.Maze.CellType.UNK;
 import static mc.challenge.maze.Maze.CellType.WLL;
 
-public class DeboChallenge implements Challenge {
+public class DeboChallenge1 implements Challenge {
 
 
     private Position playerPos = new Position(1050, 1050);
@@ -59,12 +55,7 @@ public class DeboChallenge implements Challenge {
                 }
             }
         }
-//         printLOSUpdate(mx);
     }
-
-
-    List<Position> movenodes = new ArrayList<>();
-
 
     @Override
     public Direction getMove() {
@@ -176,7 +167,7 @@ public class DeboChallenge implements Challenge {
 
 
     public static void main(String[] args) {
-        new HeadlessMain(new DeboChallenge(),
+        new HeadlessMain(new DeboChallenge1(),
 //                MazeFactory.getFlowingCave(
 //                MazeFactory.get1WMap(
                 MazeFactory.getDungeon(

@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import mc.challenge.Challenge;
 import mc.challenge.maze.Maze;
 import mc.challenge.maze.MazeFactory;
-import mc.participants.deboder.DeboChallenge;
-import mc.renamebeforepr.ChallengeImpl;
+import mc.participants.deboder1.DeboChallenge1;
+import mc.participants.deboder2.DeboChallenge2;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -28,7 +28,7 @@ public class Configuration {
      * - 1000 = 1 second
      * - 0 = no wait
      */
-    public static long minimumDelayMS = 0;
+    public static long minimumDelayMS = 200;
 
     /**
      * Dimentions for generated mazes
@@ -42,7 +42,7 @@ public class Configuration {
     ///////// Graphical
     public static final int WINDOW_HEIGHT = 1200;
     public static final int WINDOW_WIDTH = 2000;
-    public static final int CELL_SIZE = 2; // size of a drawn square/cell
+    public static final int CELL_SIZE = 16; // size of a drawn square/cell
     public static final int OFFSET_X = 100; // draw screen from left offset
     public static final int OFFSET_Y = 100; // draw screen from bottom offset
 
@@ -63,32 +63,32 @@ public class Configuration {
     /**
      * Most important part, deliver your own implementation of the Challenge interface
      */
-    public static final Supplier<? extends Challenge> challenge = DeboChallenge::new;
+    public static final Supplier<? extends Challenge> challenge = DeboChallenge2::new;
 
     /**
      * These are the mazes that are ran ( chance for testing if you feel the need )
      */
     public static final List<Supplier<Maze>> MAZES = List.of(
-            () -> MazeFactory.getEmptyMap(SMALL),
-            () -> MazeFactory.getEmptyMap(MEDIUM),
-            () -> MazeFactory.get1WMap(SMALL),
-            () -> MazeFactory.getDungeon(SMALL),
+//            () -> MazeFactory.getEmptyMap(SMALL)
+//            () -> MazeFactory.getEmptyMap(MEDIUM)
+            () -> MazeFactory.get1WMap(SMALL)
+//            () -> MazeFactory.getDungeon(SMALL)
 
-            () -> MazeFactory.getScatterMap(MEDIUM),
-            () -> MazeFactory.get1WMap(MEDIUM),
-            () -> MazeFactory.getFlowingCave(MEDIUM),
-            () -> MazeFactory.getDungeon(MEDIUM),
-
-            () -> MazeFactory.getScatterMap(LARGE),
-            () -> MazeFactory.getLarge1wMazeFromFile(1),
-            () -> MazeFactory.getFlowingCave(LARGE),
-            () -> MazeFactory.getDungeon(LARGE),
-
-
-            () -> MazeFactory.getScatterMap(HUGE),
-            () -> MazeFactory.getHuge1wMazeFromFile(1),
-            () -> MazeFactory.getHugeFlowingCaveMazeFromFile(1),
-            () -> MazeFactory.getHugeDungeonMazeFromFile(1)
+//            () -> MazeFactory.getScatterMap(MEDIUM)
+//            () -> MazeFactory.get1WMap(MEDIUM),
+//            () -> MazeFactory.getFlowingCave(MEDIUM),
+//            () -> MazeFactory.getDungeon(MEDIUM)
+//
+//            () -> MazeFactory.getScatterMap(LARGE),
+//            () -> MazeFactory.getLarge1wMazeFromFile(1),
+//            () -> MazeFactory.getFlowingCave(LARGE),
+//            () -> MazeFactory.getDungeon(LARGE),
+//
+//
+//            () -> MazeFactory.getScatterMap(HUGE),
+//            () -> MazeFactory.getHuge1wMazeFromFile(1),
+//            () -> MazeFactory.getHugeFlowingCaveMazeFromFile(1),
+//            () -> MazeFactory.getHugeDungeonMazeFromFile(1)
 
     );
 
