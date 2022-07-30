@@ -51,6 +51,7 @@ public class Configuration {
     public static final Color UNKNOWNCOLOR = Color.BLACK;
     public static final Color FLOORCOLOR = Color.SALMON;
     public static final Color BORDERCOLOR = Color.WHITE;
+    public static final Color VISITEDCOLOR = Color.YELLOW;
 
 
     ///////// CLI
@@ -70,11 +71,11 @@ public class Configuration {
     public static final List<Supplier<Maze>> MAZES = List.of(
 //            () -> MazeFactory.getEmptyMap(SMALL)
 //            () -> MazeFactory.getEmptyMap(MEDIUM)
-            () -> MazeFactory.get1WMap(SMALL)
+//            () -> MazeFactory.get1WMap(SMALL)
 //            () -> MazeFactory.getDungeon(SMALL)
 
 //            () -> MazeFactory.getScatterMap(MEDIUM)
-//            () -> MazeFactory.get1WMap(MEDIUM),
+            () -> MazeFactory.get1WMap(MEDIUM)
 //            () -> MazeFactory.getFlowingCave(MEDIUM),
 //            () -> MazeFactory.getDungeon(MEDIUM)
 //

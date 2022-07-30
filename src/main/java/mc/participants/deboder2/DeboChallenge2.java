@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -31,7 +32,7 @@ import static mc.challenge.maze.Maze.CellType.WLL;
 public class DeboChallenge2 implements Challenge {
 
 
-    private static int SIZE = 35;
+    private static int SIZE = 500;
 
     private Position playerPos = new Position(SIZE / 2, SIZE / 2);
     private final int poffset = 6;
@@ -56,6 +57,109 @@ public class DeboChallenge2 implements Challenge {
         throw new RuntimeException("Did not select direction Strategy");
     };
 
+    private Position lastPos = playerPos;
+    Supplier<Direction> w1DirStrategy = () -> {
+        var list = getOpenSurrounds(playerPos.row(), playerPos.col(), w1Mx);
+
+        System.out.println("--w1DirStrategy");
+        var ppostemp = playerPos;
+        Direction dir = null;
+
+        if (list.size() == 1) {
+            setArrPos(playerPos, w1Mx, '#');
+            dir = fromTo(playerPos, list.get(0));
+            playerPos = list.get(0);
+        } else if (list.size() == 2) {
+            var p1 = list.get(0);
+            var p2 = list.get(1);
+            if (p2.equals(lastPos)) {
+                dir = fromTo(playerPos, p1);
+                playerPos = p1;
+
+            } else {
+                dir = fromTo(playerPos, p2);
+                playerPos = p2;
+
+            }
+        } else if (list.size() == 3) {
+            var p1 = list.get(0);
+            var p2 = list.get(1);
+            var p3 = list.get(2);
+            setArrPos(lastPos, w1Mx, 'V');
+            if (p1.equals(lastPos)) {
+
+                if (visited(p2, w1Mx)) {
+                    dir = fromTo(playerPos, p3);
+                    playerPos = p3;
+                } else {
+                    dir = fromTo(playerPos, p2);
+                    playerPos = p2;
+                }
+            } else if (p2.equals(lastPos)) {
+                if (visited(p1, w1Mx)) {
+                    dir = fromTo(playerPos, p3);
+                    playerPos = p3;
+                } else {
+                    dir = fromTo(playerPos, p1);
+                    playerPos = p1;
+                }
+            } else {
+                if (visited(p2, w1Mx)) {
+                    dir = fromTo(playerPos, p1);
+                    playerPos = p1;
+                } else {
+                    dir = fromTo(playerPos, p2);
+                    playerPos = p2;
+                }
+
+            }
+            setArrPos(playerPos, w1Mx, 'V');
+        } else if (list.size() == 4) {
+            var getBest = getOpenSurroundsWithoutV(playerPos.row(), playerPos.col(), w1Mx);
+
+            if (getBest.isEmpty()) {
+                if(list.get(0).equals(lastPos)){
+                    list.remove(0);
+                }
+                dir = fromTo(playerPos, list.get(0));
+                playerPos = list.get(0);
+                setArrPos(playerPos, w1Mx, 'V');
+            } else {
+                if(getBest.get(0).equals(lastPos)){
+                    getBest.remove(0);
+                }
+                dir = fromTo(playerPos, getBest.get(0));
+                playerPos = getBest.get(0);
+                setArrPos(playerPos, w1Mx, 'V');
+            }
+
+        }
+        lastPos = ppostemp;
+        if (dir != null) {
+            System.out.println(dir + " " + playerPos);
+            return dir;
+        }
+
+        throw new RuntimeException("not implemented");
+    };
+
+    private boolean visited(Position p, char[][] arr) {
+        return arr[p.row()][p.col()] == 'V';
+    }
+
+    private void setArrPos(Position p, char[][] mx, char target) {
+        mx[p.row()][p.col()] = target;
+    }
+
+    public Direction fromTo(Position from, Position to) {
+        if (from.row() < to.row()) return NORTH;
+        if (from.row() > to.row()) return SOUTH;
+        if (from.col() > to.col()) return WEST;
+        if (from.col() < to.col()) return EAST;
+        throw new RuntimeException("can not");
+    }
+
+
     private void setSelectStrategy(CellType[][] mx) {
         if (isWidth1(mx)) {
             handleLOSStrategy = width1Strategy;
@@ -66,7 +170,9 @@ public class DeboChallenge2 implements Challenge {
 
             handleLOSStrategy.accept(mx);
 
-        } else throw new RuntimeException();
+            directionStrategy = w1DirStrategy;
+
+        } else throw new RuntimeException("implement other strategies.");
 
     }
 
@@ -82,18 +188,70 @@ public class DeboChallenge2 implements Challenge {
                 if (w1Mx[cellR][cellC] == '?') {
                     w1Mx[cellR][cellC] = losval;
                 }
+                has3walls(cellR, cellC, w1Mx);
             }
         }
 
         System.out.println();
-        for (int x = w1Mx.length-1; x >=0; x--) {
-            System.out.println(Arrays.toString(w1Mx[x]));
-            if (x == playerPos.row()) {
 
+        int low = Integer.MAX_VALUE;
+
+        for (int x = w1Mx.length - 1; x >= 0; x--) {
+            if (contains(w1Mx[x], '#')) {
+
+                for (int c = playerPos.col() - 20; c < playerPos.col() + 60; c++) {
+                    System.out.print(w1Mx[x][c]);
+                }
+                System.out.println();
             }
+
         }
         System.out.println();
     };
+
+    private boolean contains(char[] arr, char c) {
+        for (var ch : arr) {
+            if (ch != '?') return true;
+        }
+        return false;
+    }
+
+    private void has3walls(int cellR, int cellC, char[][] mx) {
+        var tmp = mx[cellR][cellC];
+        if (!(tmp == '.' || tmp == 'S')) return;
+        if (playerPos.row() == cellR && playerPos.col() == cellC) return;
+
+        var list = getOpenSurrounds(cellR, cellC, mx);
+
+        if (list.size() == 1) {
+            mx[cellR][cellC] = '#';
+            var p = list.get(0);
+            has3walls(p.row(), p.col(), mx);
+        }
+
+    }
+
+    private List<Position> getOpenSurrounds(int r, int c, char[][] mx) {
+        List<Position> list = new ArrayList<>(4);
+        for (var dir : Direction.values()) {
+            var tmp = dir.getTP().plus(r, c);
+            if (mx[tmp.row()][tmp.col()] != '#') {
+                list.add(tmp);
+            }
+        }
+        return list;
+    }
+
+    private List<Position> getOpenSurroundsWithoutV(int r, int c, char[][] mx) {
+        List<Position> list = new ArrayList<>(4);
+        for (var dir : Direction.values()) {
+            var tmp = dir.getTP().plus(r, c);
+            if (mx[tmp.row()][tmp.col()] != '#' && mx[tmp.row()][tmp.col()] != 'V') {
+                list.add(tmp);
+            }
+        }
+        return list;
+    }
 
     private static char[] lookup = new char[10];
 
