@@ -1,4 +1,4 @@
-package mc.renamebeforepr;
+package mc.participants.takeshi;
 
 public record FringeEntry(FringeEntry previousPath, AbsolutePosition destination, int steps, int cost) implements Comparable<FringeEntry> {
 //    private final int cost;

@@ -1,4 +1,4 @@
-package mc.renamebeforepr;
+package mc.participants.takeshi;
 
 import mc.challenge.maze.Direction;
 import mc.challenge.maze.Maze;

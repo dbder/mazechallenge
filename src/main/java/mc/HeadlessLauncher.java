@@ -1,11 +1,12 @@
 package mc;
 
 import mc.challenge.maze.HeadlessMain;
+import mc.participants.takeshi.TakeshiChallenge;
 
 /**
  * Runs the mazes configured in {@link Configuration} headless
  * <p>
- * Write the code in : {@link mc.renamebeforepr.ChallengeImpl}
+ * Write the code in : {@link TakeshiChallenge}
  */
 public class HeadlessLauncher {
 

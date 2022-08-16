@@ -2,9 +2,9 @@ package path;
 
 import mc.challenge.maze.Direction;
 import mc.challenge.maze.Maze.CellType;
-import mc.renamebeforepr.AbsolutePosition;
-import mc.renamebeforepr.ChallengeImpl;
-import mc.renamebeforepr.PathFindingCallback;
+import mc.participants.takeshi.AbsolutePosition;
+import mc.participants.takeshi.TakeshiChallenge;
+import mc.participants.takeshi.PathFindingCallback;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class PathFindingTest {
         Assert.assertNotEquals(from, to);
         Assert.assertTrue(maze.size() > 0);
         System.out.println(maze.size());
-        List<AbsolutePosition> path = new ArrayList<>(ChallengeImpl.findPath(from, to, maze, false, PathFindingCallback.NO_OP));
+        List<AbsolutePosition> path = new ArrayList<>(TakeshiChallenge.findPath(from, to, maze, false, PathFindingCallback.NO_OP));
         Assert.assertTrue(path.size() > 0);
         Assert.assertEquals(to, path.get(path.size() - 1));
         Direction direction = from.directionTo(path.get(0));
@@ -44,7 +44,7 @@ public class PathFindingTest {
         Assert.assertNotEquals(from, to);
         Assert.assertTrue(maze.size() > 0);
         System.out.println(maze.size());
-        List<AbsolutePosition> path = new ArrayList<>(ChallengeImpl.findPath(from, to, maze, false, PathFindingCallback.NO_OP));
+        List<AbsolutePosition> path = new ArrayList<>(TakeshiChallenge.findPath(from, to, maze, false, PathFindingCallback.NO_OP));
         Assert.assertTrue(path.size() > 0);
         Assert.assertEquals(to, path.get(path.size() - 1));
         Direction direction = from.directionTo(path.get(0));
@@ -63,9 +63,9 @@ public class PathFindingTest {
         System.out.println(maze.size());
         System.out.println(from + " -> " + to);
         System.out.println(from.stepDistance(to));
-        ChallengeImpl.print(maze, Map.of(from, "FFF", to, "TTT"));
-        ChallengeImpl.findPath(from, to, maze, false, PathFindingCallback.NO_OP);
-        List<AbsolutePosition> path = new ArrayList<>(ChallengeImpl.findPath(from, to, maze, false, PathFindingCallback.NO_OP));
+        TakeshiChallenge.print(maze, Map.of(from, "FFF", to, "TTT"));
+        TakeshiChallenge.findPath(from, to, maze, false, PathFindingCallback.NO_OP);
+        List<AbsolutePosition> path = new ArrayList<>(TakeshiChallenge.findPath(from, to, maze, false, PathFindingCallback.NO_OP));
         Assert.assertTrue(path.size() > 0);
         Assert.assertEquals(to, path.get(path.size() - 1));
         Direction direction = from.directionTo(path.get(0));
@@ -81,8 +81,8 @@ public class PathFindingTest {
         Map<AbsolutePosition, CellType> maze = (Map<AbsolutePosition, CellType>) in.readObject();
         Assert.assertNotEquals(from, to);
         Assert.assertTrue(maze.size() > 0);
-        ChallengeImpl.print(maze, Map.of(from, "FFF", to, "TTT"));
-        List<AbsolutePosition> path = new ArrayList<>(ChallengeImpl.findPath(from, to, maze, false, PathFindingCallback.NO_OP));
+        TakeshiChallenge.print(maze, Map.of(from, "FFF", to, "TTT"));
+        List<AbsolutePosition> path = new ArrayList<>(TakeshiChallenge.findPath(from, to, maze, false, PathFindingCallback.NO_OP));
         Assert.assertTrue(path.size() > 0);
         Assert.assertEquals(to, path.get(path.size() - 1));
         Direction direction = from.directionTo(path.get(0));

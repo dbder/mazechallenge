@@ -1,7 +1,6 @@
-package mc.renamebeforepr;
+package mc.participants.takeshi;
 
 import mc.challenge.maze.Direction;
-import mc.challenge.maze.Maze;
 
 public record LosPosition(int row, int col) implements Position {
     public LosPosition {

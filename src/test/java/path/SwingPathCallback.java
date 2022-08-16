@@ -1,9 +1,9 @@
 package path;
 
 import mc.challenge.maze.Maze;
-import mc.renamebeforepr.AbsolutePosition;
-import mc.renamebeforepr.FringeEntry;
-import mc.renamebeforepr.PathFindingCallback;
+import mc.participants.takeshi.AbsolutePosition;
+import mc.participants.takeshi.FringeEntry;
+import mc.participants.takeshi.PathFindingCallback;
 
 import javax.swing.*;
 import java.awt.*;

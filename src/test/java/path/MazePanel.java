@@ -1,7 +1,7 @@
 package path;
 
-import mc.renamebeforepr.AbsolutePosition;
-import mc.renamebeforepr.ChallengeImpl;
+import mc.participants.takeshi.AbsolutePosition;
+import mc.participants.takeshi.TakeshiChallenge;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public class MazePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        AbsolutePosition[] minMax = ChallengeImpl.discoverMinMax(this.positions);
+        AbsolutePosition[] minMax = TakeshiChallenge.discoverMinMax(this.positions);
         if (minMax[0] == null) {
             return;
         }

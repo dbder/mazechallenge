@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import mc.challenge.Challenge;
 import mc.challenge.maze.Maze;
 import mc.challenge.maze.MazeFactory;
-import mc.renamebeforepr.ChallengeImpl;
+import mc.participants.takeshi.TakeshiChallenge;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -27,7 +27,7 @@ public class Configuration {
      * - 1000 = 1 second
      * - 0 = no wait
      */
-    public static long minimumDelayMS = 200;
+    public static long minimumDelayMS = 0;
 
     /**
      * Dimentions for generated mazes
@@ -41,7 +41,7 @@ public class Configuration {
     ///////// Graphical
     public static final int WINDOW_HEIGHT = 1400;
     public static final int WINDOW_WIDTH = 1400;
-    public static final int CELL_SIZE = 16; // size of a drawn square/cell
+    public static final int CELL_SIZE = 1; // size of a drawn square/cell
     public static final int OFFSET_X = 200; // draw screen from left offset
     public static final int OFFSET_Y = 200; // draw screen from bottom offset
 
@@ -64,7 +64,7 @@ public class Configuration {
     /**
      * Most important part, deliver your own implementation of the Challenge interface
      */
-    public static final Supplier<? extends Challenge> challenge = ChallengeImpl::new;
+    public static final Supplier<? extends Challenge> challenge = TakeshiChallenge::new;
 //    public static final Supplier<? extends Challenge> challenge = EveryOSChallenge::new;
 //    public static final Supplier<? extends Challenge> challenge = RedemptChallenge::new;
 //    public static final Supplier<? extends Challenge> challenge = RedemptChallenge::new;
@@ -94,7 +94,7 @@ public class Configuration {
             () -> MazeFactory.getHugeFlowingCaveMazeFromFile(1),
             () -> MazeFactory.getHugeDungeonMazeFromFile(1)
     );
-
+//
 //    public static final List<Supplier<Maze>> MAZES = List.of(
 //            () -> MazeFactory.getLarge1wMazeFromFile(1),
 //            () -> MazeFactory.getLarge1wMazeFromFile(2),
@@ -168,8 +168,8 @@ public class Configuration {
 //            () -> MazeFactory.getHugeDungeonMazeFromFile(13),
 //            () -> MazeFactory.getHugeDungeonMazeFromFile(14)
 //    );
-
-
+//
+//
 //    public static final List<Supplier<Maze>> MAZES = List.of(
 //            () -> MazeFactory.getEmptyMap(MEDIUM),
 //            () -> MazeFactory.getEmptyMap(MEDIUM),
