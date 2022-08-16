@@ -124,8 +124,9 @@ public abstract class Maze {
         var type = matrix[newPosition.row()][newPosition.col()];
 
         if (type == WLL) {
-            System.out.println("Warning: WALL HIT");
-            return empty();
+//            System.out.println("Warning: WALL HIT");
+            throw new RuntimeException("WALL HIT");
+//            return empty();
         }
 
         stepsTaken++;
@@ -346,7 +347,7 @@ public abstract class Maze {
         drawPlayer.accept(getPlayerRelativePosition());
     }
 
-    public void drawVisited(Consumer<boolean[][]> drawVis){
+    public void drawVisited(Consumer<boolean[][]> drawVis) {
         drawVis.accept(exploredvisitedMx());
     }
 
