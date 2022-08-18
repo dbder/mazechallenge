@@ -41,7 +41,7 @@ public class Configuration {
     ///////// Graphical
     public static final int WINDOW_HEIGHT = 1400;
     public static final int WINDOW_WIDTH = 1400;
-    public static final int CELL_SIZE = 1; // size of a drawn square/cell
+    public static final int CELL_SIZE = 10; // size of a drawn square/cell
     public static final int OFFSET_X = 200; // draw screen from left offset
     public static final int OFFSET_Y = 200; // draw screen from bottom offset
 
@@ -73,26 +73,25 @@ public class Configuration {
      * These are the mazes that are ran ( chance for testing if you feel the need )
      */
     public static final List<Supplier<Maze>> MAZES = List.of(
-            () -> MazeFactory.getEmptyMap(SMALL),
-            () -> MazeFactory.getEmptyMap(MEDIUM),
-            () -> MazeFactory.get1WMap(SMALL),
-            () -> MazeFactory.getDungeon(SMALL),
 
-            () -> MazeFactory.getScatterMap(MEDIUM),
-            () -> MazeFactory.get1WMap(MEDIUM),
-            () -> MazeFactory.getFlowingCave(MEDIUM),
-            () -> MazeFactory.getDungeon(MEDIUM),
-
-            () -> MazeFactory.getScatterMap(LARGE),
-            () -> MazeFactory.getLarge1wMazeFromFile(1),
-            () -> MazeFactory.getFlowingCave(LARGE),
-            () -> MazeFactory.getDungeon(LARGE),
-
-
-            () -> MazeFactory.getScatterMap(HUGE),
-            () -> MazeFactory.getHuge1wMazeFromFile(1),
-            () -> MazeFactory.getHugeFlowingCaveMazeFromFile(1),
-            () -> MazeFactory.getHugeDungeonMazeFromFile(1)
+            () -> MazeFactory.get1WMap(MEDIUM)
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE),
+//            () -> MazeFactory.getFlowingCave(HUGE)
     );
 //
 //    public static final List<Supplier<Maze>> MAZES = List.of(
